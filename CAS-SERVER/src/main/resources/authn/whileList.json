@@ -1,0 +1,25 @@
+{
+  "@class" : "java.util.LinkedHashMap",
+  "sam" : {
+    "@class" : "org.apereo.cas.adaptors.generic.CasUserAccount",
+    "password" : "sam",
+    "attributes" : {
+      "@class" : "java.util.LinkedHashMap",
+      "firstName" : "sam",
+      "lastName" : "wang"
+    },
+    "status" : "OK",
+    "expirationDate" : "2020-10-19"
+  },
+  "tom" : {
+    "@class" : "org.apereo.cas.adaptors.generic.CasUserAccount",
+    "password" : "tom",
+    "attributes" : {
+      "@class" : "java.util.LinkedHashMap",
+      "firstName" : "tom",
+      "lastName" : "wang"
+    },
+    "status" : "OK",
+    "expirationDate" : "2020-10-19"
+  }
+}

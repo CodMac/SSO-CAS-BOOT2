@@ -1,0 +1,36 @@
+server:
+    #端口
+    port: 8088
+    session:
+        #session过期期限
+        timeout: 1000 # in seconds
+    context-path: /CAS-CLIENT-SPRINGBOOT
+    
+spring:
+    application:
+        name: CAS-CLIENT-SPRINGBOOT
+    #redis
+    redis:
+        database: 0
+        host: 127.0.0.1
+        port: 6379
+        pool:
+            #使用负值表示没有限制
+            max-active: 8
+            #使用负值表示没有限制
+            max-wait: -1
+            max-idle: 8
+            min-idle: 0
+        #毫秒
+        timeout: 10000
+
+#cas配置 配置单点登录
+cas:
+    #cas服务端前缀,不是登录地址
+    server-url-prefix: http://mc.dev.com:1010/cas
+    server-login-url: http://mc.dev.com:1010/cas/login
+    client-host-url: http://127.0.0.1:8088/CAS-CLIENT-SPRINGBOOT
+    #Ticket校验器使用Cas30ProxyReceivingTicketValidationFilter
+    validation-type: CAS3
+            
+    

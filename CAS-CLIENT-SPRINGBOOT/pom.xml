@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>CAS-CLIENT-SPRINGBOOT</artifactId>
+	<name>CAS-CLIENT-SPRINGBOOT</name>
+	<url>http://maven.apache.org</url>
+
+	<parent>
+		<groupId>zqit</groupId>
+		<artifactId>SSO-CAS</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<cas.version>5.3.2</cas.version>
+		<springboot.version>2.0.0.RELEASE</springboot.version>
+	</properties>
+
+	<!-- 仓库 -->
+	<repositories>
+		<repository>
+			<id>maven-ali</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public//</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<!-- 依赖管理 -->
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- spring-boot -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${springboot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+	
+		<!--cas的客户端 -->
+		<dependency>
+			<groupId>net.unicon.cas</groupId>
+			<artifactId>cas-client-autoconfig-support</artifactId>
+			<version>1.4.0-GA</version>
+		</dependency>
+		<dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+		
+		<!-- spring-web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<!-- lombok -->
+		<dependency>
+		 	<groupId>org.projectlombok</groupId>
+		 	<artifactId>lombok</artifactId>		 
+	 	</dependency>
+	 	
+	 	<!-- spring session -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-core</artifactId>
+		</dependency>
+		
+	</dependencies>
+	
+	<build>
+		<finalName>CAS-CLIENT-SPRINGBOOT</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<configuration>
+						<warSourceExcludes>/CAS-CLIENT-SPRINGBOOT/src/main/resources/static</warSourceExcludes>
+					</configuration>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<!-- 跳过测试 -->
+					<skipTests>true</skipTests>
+					<!-- 忽略test类编译出错 -->
+					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			</plugin>
+			<plugin><!-- 打包本地jar -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>lib</directory>
+							<targetPath>WEB-INF/lib/</targetPath>
+							<includes>
+								<include>**/*.jar</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

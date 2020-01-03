@@ -1,0 +1,107 @@
+#*****# mybatis 相关配置 - 在/CAS-SERVER/src/main/java/zqit/server/pulgins/mybatis/MybatisConfig.java 注入
+mbs:
+   datasource:
+      url: jdbc:mysql://localhost:3306/cas_dev?characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: root
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+   mapper-locations: classpath:mapper/**/*Mapper.xml
+
+
+#*****# cas配置
+cas:
+   ### 认证
+   authn:
+      policy:
+         any:
+            tryAll: false
+      #方式1: 静态登录的用户名和密码
+      accept:
+         users: lim::staticPWD
+      #方式2: jdbc认证(盐)
+      jdbc:
+         encode[0]:
+            sql: select * from sys_user_jdbc where username=?
+            passwordFieldName: password
+            # 指定过期字段 int 类型 1为过期 0 为不过期
+            expiredFieldName: expired
+            # 指定状态字段 int 类型 1为不可用 0为可用
+            disabledFieldName: disabled
+            # 盐值固定列
+            saltFieldName: username
+            #静态盐值
+            #staticSalt: ssstttaaa
+            numberOfIterationsFieldName: 
+            numberOfIterations: 1
+            #对处理盐值后的算法
+            algorithmName: MD5
+            url: jdbc:mysql://localhost:3306/cas_dev?characterEncoding=UTF-8&useSSL=false
+            dialect: org.hibernate.dialect.MySQLDialect
+            user: root
+            password: root
+            driverClass: com.mysql.jdbc.Driver
+      #方式3: json白名单认证
+      json:
+         location: file:///Users/mac/WORK/workspace-oxygen/SSO-CAS/CAS-SERVER/src/main/resources/authn/whileList.json
+      #方式4: restful认证
+      rest:
+         uri: http://localhost:8081/cas/authn/login
+      #方式5: 自定义认证策略(与shrio整合)
+      #zqit.server.pulgins.shiro.ShiroAuthenticationConfiguration
+      #zqit.server.pulgins.shiro.ShiroAuthenticationHandler
+   ### cas单点登出配置
+   logout:
+      #配置允许登出后跳转到指定页面
+      followServiceRedirects: true
+      #跳转到指定页面需要的参数名为 service
+      redirectParameter: service
+      #在退出时是否需要 确认一下  true确认 false直接退出
+      confirmLogout: true
+      #是否移除子系统的票据
+      removeDescendantTickets: true
+   ### Ticket Granting Cookie   
+   tgc:
+      # 票根secure功能是否开启
+      secure: false
+      # cookie名
+      name: TGC
+      # 票根加密
+      crypto:
+         enabled: false
+   ### 客户端服务发现配置 
+   serviceRegistry:
+      #开启识别json文件，默认false
+      initFromJson: true
+      #自动扫描服务配置，默认开启
+      watcherEnabled: true 
+   ### ticket-Redis 配置(ticket不再存在默认的map内存中, 而是委托redis管理)
+   ticket:
+      registry:
+         # 票根管理-redis
+         redis:
+            host: 127.0.0.1
+            port: 6379
+            database: 0
+            use-ssl: false
+            use-pool: false
+            timeout: 2000
+   ### session 会话配置
+   webflow:
+      autoconfigure: true
+      alwaysPauseRedirect: false
+      refresh: true
+      redirectSameState: false
+      session:
+         lockTimeout: 30
+         compress: false
+         maxConversations: 5
+         # Enable server-side session management
+         storage: true
+spring:
+   session:
+      store-type: redis
+   redis:
+      host: 127.0.0.1
+      port: 6379
+
