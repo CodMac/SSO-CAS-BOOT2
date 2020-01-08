@@ -50,6 +50,7 @@ cas:
       #方式5: 自定义认证策略(与shrio整合)
       #zqit.server.pulgins.shiro.ShiroAuthenticationConfiguration
       #zqit.server.pulgins.shiro.ShiroAuthenticationHandler
+      # 认证方式
    ### cas单点登出配置
    logout:
       #配置允许登出后跳转到指定页面

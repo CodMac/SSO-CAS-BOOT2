@@ -96,6 +96,11 @@
 			<groupId>org.apereo.cas</groupId>
 			<artifactId>cas-server-core-authentication-api</artifactId>
 		</dependency>
+		<!-- 认证方式5: LADP认证 -->
+		<dependency>
+		     <groupId>org.apereo.cas</groupId>
+		     <artifactId>cas-server-support-ldap</artifactId>
+		</dependency>
 		<!-- cas-sesssion-redis -->
 		<!-- session服务端会话管理, 托管存储至redis -->
 		<dependency>

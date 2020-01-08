@@ -20,5 +20,6 @@
 	<modules>
 		<module>CAS-SERVER</module>
     <module>CAS-CLIENT-SPRINGBOOT</module>
+    <module>CAS-CLIENT-SPRINGBOOT2</module>
   </modules>
 </project>

@@ -1,14 +1,14 @@
 server:
     #端口
-    port: 8088
+    port: 8089
     session:
         #session过期期限
         timeout: 1000 # in seconds
-    context-path: /CAS-CLIENT-SPRINGBOOT
+    context-path: /CAS-CLIENT-SPRINGBOOT2
     
 spring:
     application:
-        name: CAS-CLIENT-SPRINGBOOT
+        name: CAS-CLIENT-SPRINGBOOT2
     #redis
     redis:
         database: 0
@@ -31,7 +31,7 @@ cas:
     server-login-url: http://mc.dev.com:1010/cas/login
     #server-url-prefix: http://cas.prd.xincheng.china:8083/cas
     #server-login-url: http://cas.prd.xincheng.china:8083/cas/login
-    client-host-url: http://mc.dev.com:1010/CAS-CLIENT-SPRINGBOOT
+    client-host-url: http://mc.dev.com:1010/CAS-CLIENT-SPRINGBOOT2
     #Ticket校验器使用Cas30ProxyReceivingTicketValidationFilter
     validation-type: CAS3
             
